@@ -8,6 +8,7 @@ build()
 
 run()
 {
+    export LD_LIBRARY_PATH=$(readlink -f ../lib)
     ln -sf ../Resources build/Resources
     ./build/main
 }
@@ -29,6 +30,13 @@ endif
     ' > .exrc
 }
 
+update_tags()
+{
+    if git diff --name-only . | grep -E '\.cpp|\.c|\.h';then
+        ~/bin/gen_tags
+    fi
+}
+
 case $1 in
     b|build)
         build
@@ -43,6 +51,9 @@ case $1 in
         gen_exrc
         ;;
     *)
+        update_tags
         build && run
         ;;
 esac
+
+
