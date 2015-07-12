@@ -9,10 +9,7 @@ cocos_build_dir=/work/src/game/cocos2d-x/build_linux
 
 build()
 {
-    waf configure build
-    # waf configure build -v
-    # waf configure build -vv
-    # waf configure build -vvv
+    ./waf configure build
 }
 
 run()
