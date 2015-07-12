@@ -3,3 +3,4 @@ cscope.*
 tags
 *.pyc
 *.orig
+.lock-waf_linux2_build

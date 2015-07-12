@@ -5,6 +5,9 @@ import os
 top = '.'
 out = 'build'
 
+libs_dir = '/work/src/game/cocos2d-x/lib'
+srcs_dir = '/work/src/game/cocos2d-x/src'
+
 def options(opt):
 	opt.load('compiler_cxx')
 
@@ -33,23 +36,25 @@ def configure(conf):
 	conf.env.append_value('DEFINES_COCOS2D', ['COCOS2D_DEBUG=1'])
 	# conf.env.append_value('DEFINES_COCOS2D', [''])
 
-	cocos2d_src_path = '/work/src/game/cocos2d-x/src'
 	conf.env.append_value('INCLUDES', ['/usr/include/GLFW', '/usr/local/include/GLFW'])
-	conf.env.append_value('INCLUDES', [cocos2d_src_path])
-	conf.env.append_value('INCLUDES', [os.path.join(cocos2d_src_path, 'cocos')])
+	conf.env.append_value('INCLUDES', [srcs_dir])
+	conf.env.append_value('INCLUDES', [os.path.join(srcs_dir, 'cocos')])
 
 	conf.env.append_value('LIBPATH_COCOS2D', [conf.path.abspath()])
-	conf.env.append_value('LIBPATH_COCOS2D', ['/work/src/game/cocos2d-x/lib'])
+	conf.env.append_value('LIBPATH_COCOS2D', [libs_dir])
+
+	conf.env.append_value('LINKFLAGS_COCOS2D', ['-rdynamic'])
 
 	conf.env.append_value('LIB_COCOS2D', ['cocos2d'])
+	# conf.env.append_value('LIBS_COCOS2D', os.path.join(libs_dir, 'libcocos2d.a'))
 
+	conf.env.append_value('LIB_COCOS2D', ['curl', 'GLU', 'GL', 'SM', 'ICE'])
 	conf.env.append_value('LIB_COCOS2D', ['X11', 'Xext'])
-	conf.env.append_value('LIB_COCOS2D', ['GL', 'expat'])
+	conf.env.append_value('LIB_COCOS2D', ['GLEW', 'glfw'])
 	conf.env.append_value('LIB_COCOS2D', ['fmodex64', 'fmodexL64'])
-	conf.env.append_value('LIB_COCOS2D', ['glfw', 'GLEW'])
-	conf.env.append_value('LIB_COCOS2D', ['unzip'])
 	conf.env.append_value('LIB_COCOS2D', ['fontconfig'])
 	conf.env.append_value('LIB_COCOS2D', ['freetype'])
+	conf.env.append_value('LIB_COCOS2D', ['unzip'])
 	conf.env.append_value('LIB_COCOS2D', ['xxhash'])
 	conf.env.append_value('LIB_COCOS2D', ['chipmunk', 'bullet'])
 	conf.env.append_value('LIB_COCOS2D', ['flatbuffers'])

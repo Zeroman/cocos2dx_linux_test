@@ -4,12 +4,15 @@
 build()
 {
     waf configure build
+    # waf configure build -v
+    # waf configure build -vv
+    # waf configure build -vvv
 }
 
 run()
 {
     export LD_LIBRARY_PATH=$(readlink -f ../lib)
-    ln -sf ../Resources build/Resources
+    ln -snf ../Resources build/Resources
     ./build/main
 }
 
@@ -25,7 +28,7 @@ if filereadable("../src/tags")
 set tags+=../src/tags
 endif
 if filereadable("../src/cscope.out")
-execute 'cscope add ../src/cscope.out'
+execute "cscope add ../src/cscope.out"
 endif
     ' > .exrc
 }
